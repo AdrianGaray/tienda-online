@@ -1,0 +1,15 @@
+<!-- <h3 class="text-warning">Listado de Productos</h3> 
+<app-producto/> 
+<app-producto/> 
+<app-producto/> -->
+<div class="container mt-3">
+    <h3 class="text-warning">Listado de Productos</h3>
+    <ul class="list-group w-50 mx-auto">
+        @for (productoElemento of productos; track productoElemento) {
+        <app-producto [producto]="productoElemento" />
+        }
+    </ul>
+
+    <app-formulario (nuevoProducto)="agregarProducto($event)" />
+
+</div>
