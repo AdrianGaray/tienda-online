@@ -1,37 +1,39 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Producto } from '../producto/producto.model';
+import { ProductoService } from '../producto.service'; 
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-formulario',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'
 })
 export class FormularioComponent {
 
+  descripcionInput: string = ''; 
+  precioInput: number | null = null; 
 
-  @ViewChild('descripcionInput') descripcionInput!: ElementRef;
-  @ViewChild('precioInput') precioInput!: ElementRef;
-  @Output() nuevoProducto = new EventEmitter<Producto>();
+  constructor(private productoService: ProductoService ){}
 
   agregarProducto(evento: Event) {
     evento.preventDefault();
-
-    // Validación simple para evitar productos sin descripción o con precio cero 
-    if (this.descripcionInput.nativeElement.value.trim() === ''
-      || this.precioInput.nativeElement.value == null || this.precioInput.nativeElement.value <= 0) {
+    
+    //Validar que sean valores correcto
+    if(this.descripcionInput.trim() === '' 
+      || this.precioInput == null || this.precioInput <=0){
       console.log('Debe ingresar una descripción y un precio válidos');
       return;
     }
 
-    const producto = new Producto(this.descripcionInput.nativeElement.value, this.precioInput.nativeElement.value);
+    const producto = new Producto(this.descripcionInput, this.precioInput);
 
-    //Emitir el evento de nuevo producto 
-    this.nuevoProducto.emit(producto);
+    // Agregamos el nuevo producto usando el servicio
+    this.productoService.agregarProducto(producto);
 
-    // Limpia los campos de entrada después de agregar el producto 
-    this.descripcionInput.nativeElement.value = '';
-    this.precioInput.nativeElement.value = 0;
+    // Limpiamos los campos del formulario
+    this.descripcionInput = '';
+    this.precioInput = null;
   }
 
 }
