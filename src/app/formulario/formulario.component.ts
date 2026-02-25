@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Producto } from '../producto/producto.model';
 import { ProductoService } from '../producto.service'; 
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario',
@@ -11,13 +11,28 @@ import { Router } from '@angular/router';
   styleUrl: './formulario.component.css'
 })
 export class FormularioComponent {
-
+  productoId: number | null = null;
   descripcionInput: string = ''; 
   precioInput: number | null = null; 
 
   constructor(private productoService: ProductoService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
    ){}
+
+  ngOnInit(){
+    // Verificamos si debemos cargar un producto ya existente
+    const id = this.route.snapshot.paramMap.get('id');
+    if(id){
+      const producto = this.productoService.getProductoById(Number(id));
+      if(producto){
+        // Si encontramos el producto lo cargamos en el formulario
+        this.productoId = producto.id;
+        this.descripcionInput = producto.descripcion;
+        this.precioInput = producto.precio;
+      }
+    }
+  }
 
    guardarProducto(evento: Event){
     evento.preventDefault();
@@ -29,7 +44,7 @@ export class FormularioComponent {
       return;
     }
 
-    const producto = new Producto(this.descripcionInput, this.precioInput);
+    const producto = new Producto(this.productoId, this.descripcionInput, this.precioInput);
 
     // Agregamos el nuevo producto usando el servicio
     this.productoService.agregarProducto(producto);
