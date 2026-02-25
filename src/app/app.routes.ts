@@ -14,7 +14,8 @@ export const routes: Routes = [
     // Ruta con parámetro /editar/:id
     // : indica parámetro dinámico.
     // Ejemplo: http://localhost:4200/editar/5
-    {path:'editar/:id', component: FormularioComponent },
+    // cambiamos el parámetro de :id por :llave
+    {path:'editar/:llave', component: FormularioComponent },
     // Ruta comodin para cualquier otra ruta no registrada
     {path: '**', component: ErrorComponent}
 ];
