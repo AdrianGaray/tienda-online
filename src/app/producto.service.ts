@@ -12,8 +12,7 @@ export class ProductoService {
     new Producto('Playera', 50.0), 
   ]; 
 
-  detalleProductoEmitter = new EventEmitter<Producto>();
-
+  
   agregarProducto(producto: Producto) { 
     this.productos.push(producto); 
   } 

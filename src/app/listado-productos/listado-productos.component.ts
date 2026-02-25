@@ -26,10 +26,6 @@ export class ListadoProductosComponent {
     // Inicializamos los productos 
     this.productos = this.productoService.productos; 
 
-    // Procesamos el evento emitido
-    this.productoService.detalleProductoEmitter.subscribe(
-      (producto: Producto) => alert(`Producto: ${producto.descripcion}, $${producto.precio}`)
-    );
   } 
 
   // Navegación a “agregar”
