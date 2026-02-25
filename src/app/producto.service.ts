@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Producto } from './producto/producto.model';
 
 @Injectable({
@@ -11,6 +11,8 @@ export class ProductoService {
     new Producto('Camisa', 80.0), 
     new Producto('Playera', 50.0), 
   ]; 
+
+  detalleProductoEmitter = new EventEmitter<Producto>();
 
   agregarProducto(producto: Producto) { 
     this.productos.push(producto); 

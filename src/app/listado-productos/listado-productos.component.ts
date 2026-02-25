@@ -15,7 +15,14 @@ export class ListadoProductosComponent {
 
   productos: Producto[] = [];
 
-  constructor(private productoService: ProductoService) {} 
+  constructor(private productoService: ProductoService) {
+    // Eso significa:
+    // * El listado queda “escuchando” (subscribe) ese evento.
+    // * Cuando cualquier ProductoComponent haga emit(...), el listado lo recibe y hace el alert.
+    this.productoService.detalleProductoEmitter.subscribe(
+      (producto: Producto) => alert(`Producto: ${producto.descripcion}, $${producto.precio}`)
+    );    
+  } 
 
   ngOnInit(): void { 
     // Inicializamos los productos 
