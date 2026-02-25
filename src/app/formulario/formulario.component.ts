@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Producto } from '../producto/producto.model';
 import { ProductoService } from '../producto.service'; 
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario',
@@ -14,9 +15,11 @@ export class FormularioComponent {
   descripcionInput: string = ''; 
   precioInput: number | null = null; 
 
-  constructor(private productoService: ProductoService ){}
+  constructor(private productoService: ProductoService,
+    private router: Router
+   ){}
 
-  agregarProducto(evento: Event) {
+   guardarProducto(evento: Event){
     evento.preventDefault();
     
     //Validar que sean valores correcto
@@ -34,6 +37,15 @@ export class FormularioComponent {
     // Limpiamos los campos del formulario
     this.descripcionInput = '';
     this.precioInput = null;
+
+    // Redirigir al inicio
+    this.router.navigate(['/']);
+
+  }
+
+    cancelar(){
+    // Redirigimos al inicio
+    this.router.navigate(['/']);
   }
 
 }
