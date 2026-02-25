@@ -24,9 +24,19 @@ export class ProductoService {
     this.productos.push(producto1, producto2, producto3);
   }  
 
-  agregarProducto(producto: Producto) { 
-    this.productos.push(producto); 
-  } 
+  // Agregar o Modificar un producto existente
+  guardarProducto(producto: Producto) {
+    if(producto.id === null){ // Caso agregar
+      producto.id = this.idSiguiente++;
+      this.productos.push(producto);
+    } else{ // Caso actualizar
+        // Si el producto tiene un ID, entonces lo actualizamos
+        const indice = this.productos.findIndex(p => p.id === producto.id);
+        if(indice !== -1){
+          this.productos[indice] = producto;
+        }
+    }
+  }
 
   // Ese método es clave para buscar un producto por su id
   // Qué significa:

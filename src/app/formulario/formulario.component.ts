@@ -47,9 +47,10 @@ export class FormularioComponent {
     const producto = new Producto(this.productoId, this.descripcionInput, this.precioInput);
 
     // Agregamos el nuevo producto usando el servicio
-    this.productoService.agregarProducto(producto);
+    this.productoService.guardarProducto(producto);
 
     // Limpiamos los campos del formulario
+    this.productoId = null;
     this.descripcionInput = '';
     this.precioInput = null;
 
