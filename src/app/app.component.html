@@ -1,5 +1,15 @@
 <div class="container text-center">
   <h1 class="text-info">{{titulo}}</h1>
+
+  <!-- Links de login y salir con Bootstrap -->
+   <div class="d-flex justify-content-center my-3">
+    @if(!isAutenticado()){
+      <a [routerLink]="['/login']" class="btn btn-outline-primary mx-2" >Login</a>
+    } @else {
+      <a style="cursor: pointer" class="btn btn-outline-danger mx-2" (click)="salir()">Salir</a>
+    }
+   </div>
+
   <!-- <router-outlet/> es “la pantalla” donde el Router pone el componente según la ruta actual. -->
-  <router-outlet/>
+  <router-outlet />
 </div>

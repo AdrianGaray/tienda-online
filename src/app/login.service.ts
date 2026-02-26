@@ -9,7 +9,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 // También vamos a crear un servicio para el manejo de login
 export class LoginService {
   
-  token: string = '';
+  token: string | null = null;
 
   constructor(
     private router: Router,
@@ -36,6 +36,22 @@ export class LoginService {
 
   getIdToken(){
     return this.token;
+  }
+
+  // Verifica si el usuario está autenticado
+  isAutenticado(){
+    return this.token != null;
+  }
+
+  // Método para cerrar sesión
+  logout(){
+    const auth = this.firebaseService.auth;
+    auth.signOut()
+    .then(() => {
+      this.token = null; //Resetea el token al cerrar sesión
+      this.router.navigate(['login']);
+    })
+    .catch((error)=> console.error('Error logout: ', error ));
   }
 
 }
