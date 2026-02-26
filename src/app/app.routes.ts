@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ListadoProductosComponent } from './listado-productos/listado-productos.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { ErrorComponent } from './error/error.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
     {path:'', component: ListadoProductosComponent}, //localhost:4200/
@@ -16,6 +17,7 @@ export const routes: Routes = [
     // Ejemplo: http://localhost:4200/editar/5
     // cambiamos el parámetro de :id por :llave
     {path:'editar/:llave', component: FormularioComponent },
+    {path: 'login', component: LoginComponent},
     // Ruta comodin para cualquier otra ruta no registrada
     {path: '**', component: ErrorComponent}
 ];
