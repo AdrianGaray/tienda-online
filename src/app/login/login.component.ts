@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class LoginComponent {
 
+   constructor(private loginService: LoginService){}
+
   // 5️⃣ ¿Qué hace el método login()?
   // Cuando el usuario envía el formulario:
   //  1️⃣ Angular pasa el formulario completo como parámetro
@@ -16,6 +19,8 @@ export class LoginComponent {
   login(form: NgForm){
    const email = form.value.email;
    const password = form.value.password; 
+   
+   this.loginService.login(email, password);
   }
 
 /* Flujo Normal:

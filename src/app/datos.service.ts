@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Producto } from './producto/producto.model';
+import { LoginService } from './login.service';
 
 // Este servicio es singleton global
 // * Se crea una sola instancia
@@ -18,7 +19,9 @@ export class DatosService {
 
   // Constructor con inyección
   // Angular inyecta automáticamente HttpClient
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+    private loginService: LoginService
+  ) { }
 
   // Metodo: listarProductos()
   // 👉 Hace un GET HTTP a Firebase
@@ -34,7 +37,10 @@ export class DatosService {
   //    ** el valor es un Producto
   // ⚠️ Firebase NO devuelve array, devuelve objeto.
   listarProductos(): Observable<{[llave:string]: Producto}>{
-    return this.httpClient.get<{[llave:string]: Producto}>(this.url + 'datos.json');
+    const token = this.loginService.getIdToken();
+    const url_listar = `${this.url}datos.json?auth=${token}`;
+    
+    return this.httpClient.get<{[llave:string]: Producto}>(url_listar);
   }  
 
   // 🔄 Flujo real
