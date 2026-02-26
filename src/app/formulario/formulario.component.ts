@@ -64,7 +64,7 @@ export class FormularioComponent {
 
   eliminarProducto(){
     if(this.llaveProducto !== null){
-      // this.productoService.eliminarProducto(this.productoId);
+      this.productoService.eliminarProducto(this.llaveProducto);
       this.limpiarFormulario();
       this.router.navigate(['/']);
     }

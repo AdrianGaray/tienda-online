@@ -68,11 +68,10 @@ export class ProductoService {
     return this.productos[llave];
   }
 
-  eliminarProducto(id: number){
-    // const indice = this.productos.findIndex(producto => producto.id === id);
-    // if(indice !== -1){
-    //   this.productos.splice(indice, 1);
-    // }
-  }
+  eliminarProducto(llave: string){
+   this.datosService.eliminarProducto(llave).subscribe(()=>{
+    this.refrescarProductos();
+   });
+  }  
 
 }

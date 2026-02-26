@@ -60,4 +60,10 @@ export class DatosService {
     return this.httpClient.put(url_modificar, producto);
   }  
 
+  eliminarProducto(llave: string): Observable<any>{
+    const url_eliminar = `${this.url}datos/${llave}.json`;
+    return this.httpClient.delete(url_eliminar);
+
+  }  
+
 }
