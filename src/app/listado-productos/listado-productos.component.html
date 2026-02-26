@@ -6,8 +6,8 @@
     </div>
 
     <ul class="list-group w-50 mx-auto">
-        @for(productoElemento of productos; track productoElemento){
-           <app-producto [producto]="productoElemento"/>
+        @for(llave of obtenerLlaves(); track llave){
+           <app-producto [producto]="productos[llave]" [llave]="llave"/>
         }
     </ul>
 

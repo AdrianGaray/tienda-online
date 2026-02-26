@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class ProductoComponent {
   @Input() producto!: Producto; 
-
+  @Input() llave!: string;
+  
   constructor(private router: Router){}
 
   editarProducto(id: number){
