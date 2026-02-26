@@ -35,7 +35,7 @@ export class ProductoService {
   // 👉 Si lo encuentra → devuelve el producto.
   // 👉 Si no lo encuentra → devuelve undefined.
 
-  getProductoById(id: number): Producto | undefined {
+  getProductoByLlave(llave: string): Producto | undefined {
     return undefined;
     //return this.productos.find(producto => producto.id === id);
   }

@@ -15,9 +15,9 @@ export class ProductoComponent {
   
   constructor(private router: Router){}
 
-  editarProducto(id: number){
+  editarProducto(){
     // Pasamos el ID en la URL
-    this.router.navigate(['/editar', id]);
+    this.router.navigate(['/editar', this.llave]);
   }
 
 }
