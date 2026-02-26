@@ -33,7 +33,11 @@ export class ProductoService {
       // Caso agregar
       // Llama a Firebase para guardar.
       // Cuando Firebase responde OK (subscribe), llama a refrescarProductos() para traer la lista de nuevo.
-      this.datosService.guardarProducto(producto).subscribe(() => {
+      this.datosService.agregarProducto(producto).subscribe(() => {
+        this.refrescarProductos();
+      });
+    }else{ // Caso actualizar
+      this.datosService.modificarProducto(producto, llave).subscribe(() => {
         this.refrescarProductos();
       });
     }
@@ -61,8 +65,7 @@ export class ProductoService {
   // 👉 Si no lo encuentra → devuelve undefined.
 
   getProductoByLlave(llave: string): Producto | undefined {
-    return undefined;
-    //return this.productos.find(producto => producto.id === id);
+    return this.productos[llave];
   }
 
   eliminarProducto(id: number){

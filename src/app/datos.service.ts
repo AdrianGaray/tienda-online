@@ -50,9 +50,14 @@ export class DatosService {
     subscribe() recibe los datos
   */
 
-  guardarProducto(producto: Producto): Observable<any>{
+  agregarProducto(producto: Producto): Observable<any>{
     // Aqui se genera el valor de la llave de manera automatica
     return this.httpClient.post(`${this.url}datos.json`, producto);
   }    
+
+  modificarProducto(producto: Producto, llave: string): Observable<any>{
+    const url_modificar = `${this.url}datos/${llave}.json`;
+    return this.httpClient.put(url_modificar, producto);
+  }  
 
 }
