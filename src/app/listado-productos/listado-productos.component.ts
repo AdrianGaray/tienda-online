@@ -13,8 +13,9 @@ import { Router } from '@angular/router';
   styleUrl: './listado-productos.component.css'
 })
 export class ListadoProductosComponent {
-
-  productos: Producto[] = [];
+ 
+  // Diccionario con claves únicas generadas por Firebase 
+  productos: {[llave:string]: Producto} = {};
 
   constructor(private productoService: ProductoService,
     private router: Router
@@ -23,10 +24,13 @@ export class ListadoProductosComponent {
 
   // ngOnInit() carga estado y escucha eventos
   ngOnInit(): void { 
-    // Inicializamos los productos 
-    this.productos = this.productoService.productos; 
-
+    this.cargarProductos();
   } 
+
+  // lo carga desde la base de datos
+  cargarProductos(){
+    
+  }
 
   // Navegación a “agregar”
   // Cuando apretás el botón:
